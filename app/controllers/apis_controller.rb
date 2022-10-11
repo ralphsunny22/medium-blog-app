@@ -88,6 +88,7 @@ class ApisController < ApplicationController
 
   end
 
+  # GET /post-likes/post_id
   def post_likes
     @post_id = params[:post_id];
     @post = Post.find_by(:id => @post_id)
@@ -109,6 +110,7 @@ class ApisController < ApplicationController
     end
   end
 
+  # GET /post-unlikes/post_id
   def post_unlikes
     @post_id = params[:post_id];
     @post = Post.find_by(:id => @post_id)
@@ -130,5 +132,28 @@ class ApisController < ApplicationController
     end
   end
 
+  # GET /user-likes
+  def user_likes
+    @post_id = params[:post_id];
+    @post_likes = @user.post_likes.where(title: "like")
+    @response = {
+            :status => 200,
+            :message => "User Likes",
+            :data => @post_likes
+        }
+        render json: @response
+  end
+
+  # GET /user-unlikes/post_id
+  def user_unlikes
+    @post_id = params[:post_id];
+    @post_likes = @user.post_likes.where(title: "unlike")
+    @response = {
+            :status => 200,
+            :message => "User Unlikes",
+            :data => @post_likes
+        }
+    render json: @response
+  end
 
 end
