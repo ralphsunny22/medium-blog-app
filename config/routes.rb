@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  #post-likes
+  get '/post-like/:post_id', to: "apis#like_post"
+
   # Defines the root path route ("/")
   # root "articles#index"
 
