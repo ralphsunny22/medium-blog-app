@@ -4,7 +4,8 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    # @posts = Post.all
+    @posts = @user.posts.all
 
     render json: @posts
   end
@@ -43,7 +44,18 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      # @post = Post.find(params[:id])
+      @post = @user.posts.find_by(:id => params[:id])
+
+      if @post
+        @post
+      else
+        @response = {
+              :status => 400,
+              :message => "Post does not exist",
+          }
+          render json: @response, status: 400
+      end
     end
 
     # Only allow a list of trusted parameters through.
