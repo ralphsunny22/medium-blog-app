@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   #post-likes
   get '/post-like/:post_id', to: "apis#like_post"
+  get '/post-unlike/:post_id', to: "apis#unlike_post"
+  get '/post-likes-unlikes/:post_id', to: "apis#post_likes_and_unlikes" #singlepost likes and unlikes
 
   # Defines the root path route ("/")
   # root "articles#index"
