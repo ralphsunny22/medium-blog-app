@@ -156,4 +156,68 @@ class ApisController < ApplicationController
     render json: @response
   end
 
+  #GET user-save-post/:post_id
+  def user_save_post
+    @post_id = params[:post_id];
+    @save_post = @user.save_posts.find_by(post_id: @post_id)
+
+    #if user has saved post b4
+    if@save_post
+        @save_post.title = 'save'
+        @save_post.post_id = @post_id
+        @save_post.user_id = @user.id
+        @save_post.save
+        @response = {
+            :status => 200,
+            :message => "Post Updated Saved Successfully",
+            :data => @save_post
+        }
+    else
+        @save_post = SavePost.new
+        @save_post.title = 'save'
+        @save_post.post_id = @post_id
+        @save_post.user_id = @user.id
+        @save_post.save
+        @response = {
+            :status => 200,
+            :message => "Post Saved Successfully",
+            :data => @save_post
+        }
+    end
+    render json: @response
+
+  end
+
+  #GET user-unsave-post/:post_id
+  def user_unsave_post
+    @post_id = params[:post_id];
+    @save_post = @user.save_posts.find_by(post_id: @post_id)
+
+    #if user has saved post b4
+    if@save_post
+        @save_post.title = 'unsave'
+        @save_post.post_id = @post_id
+        @save_post.user_id = @user.id
+        @save_post.save
+        @response = {
+            :status => 200,
+            :message => "Post Updated Unsaved Successfully",
+            :data => @save_post
+        }
+    else
+        @save_post = SavePost.new
+        @save_post.title = 'unsave'
+        @save_post.post_id = @post_id
+        @save_post.user_id = @user.id
+        @save_post.save
+        @response = {
+            :status => 200,
+            :message => "Post Unsaved Successfully",
+            :data => @save_post
+        }
+    end
+    render json: @response
+
+  end
+
 end

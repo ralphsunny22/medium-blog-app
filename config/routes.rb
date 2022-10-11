@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   get '/user-likes', to: "apis#user_likes" #singleUser likes
   get '/user-unlikes', to: "apis#user_unlikes" #singleUser unlikes
 
+  #user-save-post
+  get '/user-save-post/:post_id', to: "apis#user_save_post" #singleUser save post
+  get '/user-unsave-post/:post_id', to: "apis#user_unsave_post" #singleUser unsave post
+
   # Defines the root path route ("/")
   # root "articles#index"
 
