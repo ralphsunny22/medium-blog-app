@@ -85,6 +85,49 @@ class ApisController < ApplicationController
           }
           render json: @response, status: 400
     end
+
+  end
+
+  def post_likes
+    @post_id = params[:post_id];
+    @post = Post.find_by(:id => @post_id)
+    
+    if@post
+        @post_likes = @post.post_likes.where(title: "like")
+        @response = {
+            :status => 200,
+            :message => "Post Likes",
+            :data => @post_likes
+        }
+        render json: @response
+    else
+        @response = {
+            :status => 400,
+            :message => "Post does not exist",
+        }
+        render json: @response, status: 400
+    end
+  end
+
+  def post_unlikes
+    @post_id = params[:post_id];
+    @post = Post.find_by(:id => @post_id)
+    
+    if@post
+        @post_likes = @post.post_likes.where(title: "unlike")
+        @response = {
+            :status => 200,
+            :message => "Post Unlikes",
+            :data => @post_likes
+        }
+        render json: @response
+    else
+        @response = {
+            :status => 400,
+            :message => "Post does not exist",
+        }
+        render json: @response, status: 400
+    end
   end
 
 
